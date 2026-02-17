@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -15,17 +16,30 @@ import 'screens/base_page.dart';
 import 'screens/welcome_page.dart';
 
 void main() async {
-  // Lock to portrait mode
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-  ]);
-
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  runApp(MyApp());
+
+  // Lock to portrait mode (mobile only)
+  if (!kIsWeb &&
+      (defaultTargetPlatform == TargetPlatform.iOS ||
+          defaultTargetPlatform == TargetPlatform.android)) {
+    await SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+  }
+
+  // Initialize Firebase on all platforms except Linux
+  if (!kIsWeb && defaultTargetPlatform != TargetPlatform.linux) {
+    try {
+      await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
+    } catch (e) {
+      print('Firebase initialization error: $e');
+    }
+  }
+
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -84,7 +98,7 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             initialRoute:
-                authProvider.isAuthenticated ? BasePage.id : WelcomePage.id,
+            authProvider.isAuthenticated ? BasePage.id : WelcomePage.id,
             routes: appRoutes,
           );
         },

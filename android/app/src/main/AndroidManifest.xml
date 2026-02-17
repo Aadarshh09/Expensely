@@ -32,6 +32,12 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+
+        <meta-data
+            android:name="com.google.firebase.app_check.debug_provider"
+            android:value="@string/firebase_app_check_debug_token" />
+
+
     </application>
     <!-- Required to query activities that can process text, see:
          https://developer.android.com/training/package-visibility and

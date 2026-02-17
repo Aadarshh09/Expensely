@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "770302644204",
-    "project_id": "receipt-manager-b3afe",
-    "storage_bucket": "receipt-manager-b3afe.appspot.com"
+    "project_number": "736274508794",
+    "project_id": "receipt-manager-app-a3d31",
+    "storage_bucket": "receipt-manager-app-a3d31.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:770302644204:android:0ae71f86dfcf65b9747ac9",
+        "mobilesdk_app_id": "1:736274508794:android:044d8d821e7be10631d243",
         "android_client_info": {
-          "package_name": "com.tamk2024sp.receipt_mana"
+          "package_name": "com.tamk2024sp.receipt_manager"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAi5hsdFqREf12wZTwadnVN3lK47we7tYU"
+          "current_key": "AIzaSyDtwevZT_V8eDGsOn3hCWCdacsZTH4Tn5c"
         }
       ],
       "services": {

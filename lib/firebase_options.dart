@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -28,20 +25,11 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for linux - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return linux;
       default:
         throw UnsupportedError(
           'DefaultFirebaseOptions are not supported for this platform.',
@@ -50,19 +38,59 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAi5hsdFqREf12wZTwadnVN3lK47we7tYU',
-    appId: '1:770302644204:android:0ae71f86dfcf65b9747ac9',
-    messagingSenderId: '770302644204',
-    projectId: 'receipt-manager-b3afe',
-    storageBucket: 'receipt-manager-b3afe.appspot.com',
+    apiKey: 'AIzaSyDtwevZT_V8eDGsOn3hCWCdacsZTH4Tn5c',
+    appId: '1:736274508794:android:044d8d821e7be10631d243',
+    messagingSenderId: '736274508794',
+    projectId: 'receipt-manager-app-a3d31',
+    storageBucket: 'receipt-manager-app-a3d31.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyD8M6WNYTKvMIqFrunI5zj_E6__NbLdYqQ',
-    appId: '1:770302644204:ios:a47bcfdc2bad0b60747ac9',
-    messagingSenderId: '770302644204',
-    projectId: 'receipt-manager-b3afe',
-    storageBucket: 'receipt-manager-b3afe.appspot.com',
+    apiKey: 'AIzaSyCepLQLHO1W_o_xEKMJfHPq7YM5AB_h5tM',
+    appId: '1:736274508794:ios:ffa34c2054448d2c31d243',
+    messagingSenderId: '736274508794',
+    projectId: 'receipt-manager-app-a3d31',
+    storageBucket: 'receipt-manager-app-a3d31.firebasestorage.app',
     iosBundleId: 'com.tamk2024sp.receiptManager',
   );
+
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyAAJSqP7x1b68f7CtoUF8lrzbCbwQBJlPM',
+    appId: '1:736274508794:web:1aafb3af7ef53ec031d243',
+    messagingSenderId: '736274508794',
+    projectId: 'receipt-manager-app-a3d31',
+    authDomain: 'receipt-manager-app-a3d31.firebaseapp.com',
+    storageBucket: 'receipt-manager-app-a3d31.firebasestorage.app',
+    measurementId: 'G-W85CNGMFCN',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyCepLQLHO1W_o_xEKMJfHPq7YM5AB_h5tM',
+    appId: '1:736274508794:ios:ffa34c2054448d2c31d243',
+    messagingSenderId: '736274508794',
+    projectId: 'receipt-manager-app-a3d31',
+    storageBucket: 'receipt-manager-app-a3d31.firebasestorage.app',
+    iosBundleId: 'com.tamk2024sp.receiptManager',
+  );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyAAJSqP7x1b68f7CtoUF8lrzbCbwQBJlPM',
+    appId: '1:736274508794:web:93b32b7f2ea0c85c31d243',
+    messagingSenderId: '736274508794',
+    projectId: 'receipt-manager-app-a3d31',
+    authDomain: 'receipt-manager-app-a3d31.firebaseapp.com',
+    storageBucket: 'receipt-manager-app-a3d31.firebasestorage.app',
+    measurementId: 'G-HEYTFKBT8D',
+  );
+
+  static const FirebaseOptions linux = FirebaseOptions(
+    apiKey: 'AIzaSyAAJSqP7x1b68f7CtoUF8lrzbCbwQBJlPM',
+    appId: '1:736274508794:web:1aafb3af7ef53ec031d243',
+    messagingSenderId: '736274508794',
+    projectId: 'receipt-manager-app-a3d31',
+    authDomain: 'receipt-manager-app-a3d31.firebaseapp.com',
+    storageBucket: 'receipt-manager-app-a3d31.firebasestorage.app',
+    measurementId: 'G-W85CNGMFCN',
+  );
+
 }

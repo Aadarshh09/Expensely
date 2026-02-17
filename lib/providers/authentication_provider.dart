@@ -8,15 +8,24 @@ import '../services/auth_service.dart';
 
 class AuthenticationProvider extends ChangeNotifier {
   User? _user;
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  late FirebaseAuth _auth;
+  bool _firebaseInitialized = false;
 
   AuthenticationProvider() {
-    // Initialize the current user and listen for auth state changes
-    _user = _auth.currentUser;
-    _auth.authStateChanges().listen((user) {
-      _user = user;
-      notifyListeners();
-    });
+    try {
+      _auth = FirebaseAuth.instance;
+      _firebaseInitialized = true;
+
+      // Initialize the current user and listen for auth state changes
+      _user = _auth.currentUser;
+      _auth.authStateChanges().listen((user) {
+        _user = user;
+        notifyListeners();
+      });
+    } catch (e) {
+      logger.e("Firebase Auth not available: $e");
+      _firebaseInitialized = false;
+    }
   }
 
   // Get the current user
@@ -25,8 +34,14 @@ class AuthenticationProvider extends ChangeNotifier {
   // Check if the user is authenticated
   bool get isAuthenticated => _user != null;
 
+  // Check if Firebase is initialized
+  bool get isFirebaseAvailable => _firebaseInitialized;
+
   // Sign in with email and password
   Future<void> signIn(String email, String password) async {
+    if (!_firebaseInitialized) {
+      throw Exception('Firebase not initialized on this platform');
+    }
     try {
       User? signedInUser = await AuthService.signInWithEmail(email, password);
       _user = signedInUser;
@@ -39,9 +54,12 @@ class AuthenticationProvider extends ChangeNotifier {
 
   // Register with email and password
   Future<void> register(String email, String password) async {
+    if (!_firebaseInitialized) {
+      throw Exception('Firebase not initialized on this platform');
+    }
     try {
       User? registeredUser =
-          await AuthService.registerWithEmail(email, password);
+      await AuthService.registerWithEmail(email, password);
       _user = registeredUser;
       notifyListeners(); // Notify listeners to update UI after registration
     } catch (e) {
@@ -52,6 +70,9 @@ class AuthenticationProvider extends ChangeNotifier {
 
   // Sign out the user
   Future<void> signOut(BuildContext context) async {
+    if (!_firebaseInitialized) {
+      throw Exception('Firebase not initialized on this platform');
+    }
     try {
       await _auth.signOut();
       // Clear UserProvider data when the user signs out
@@ -65,6 +86,9 @@ class AuthenticationProvider extends ChangeNotifier {
 
   // Re-authenticate the user with email and password
   Future<void> reAuthenticate(String email, String password) async {
+    if (!_firebaseInitialized) {
+      throw Exception('Firebase not initialized on this platform');
+    }
     try {
       await AuthService.reAuthenticate(email, password);
       notifyListeners(); // Notify listeners if re-authentication affects app state
@@ -75,6 +99,9 @@ class AuthenticationProvider extends ChangeNotifier {
 
   // Delete the user account
   Future<void> deleteAccount() async {
+    if (!_firebaseInitialized) {
+      throw Exception('Firebase not initialized on this platform');
+    }
     try {
       await AuthService.deleteAccount();
       _user = null;
@@ -86,6 +113,9 @@ class AuthenticationProvider extends ChangeNotifier {
 
   // Send password reset email
   Future<void> sendPasswordResetEmail(String email) async {
+    if (!_firebaseInitialized) {
+      throw Exception('Firebase not initialized on this platform');
+    }
     try {
       await AuthService.sendPasswordResetEmail(email: email);
     } catch (e) {

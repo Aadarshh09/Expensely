@@ -22,10 +22,20 @@ class AuthService {
         email: email,
         password: password,
       );
+
+      // Skip email verification check for development
+      // In production, you should require email verification
+      // if (!userCredential.user!.emailVerified) {
+      //   throw FirebaseAuthException(
+      //     code: 'email-not-verified',
+      //     message: 'Please verify your email before logging in.',
+      //   );
+      // }
+
       return userCredential.user;
     } on FirebaseAuthException catch (e) {
       logger.e("Error signing in: ${e.message}");
-      rethrow; // Rethrow to be caught by the calling function
+      rethrow;
     }
   }
 
@@ -34,6 +44,11 @@ class AuthService {
     try {
       UserCredential userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
+
+      // Send verification email (but don't require it for login)
+      // Uncomment if you want to send verification emails
+      // await userCredential.user?.sendEmailVerification();
+
       logger.i("User registered: ${userCredential.user?.email}");
       return userCredential.user;
     } on FirebaseAuthException catch (e) {

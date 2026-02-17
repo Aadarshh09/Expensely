@@ -20,8 +20,8 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.tamk2024sp.receipt_mana"
-        minSdkVersion 23
+        applicationId = "com.tamk2024sp.receipt_manager"
+        minSdkVersion flutter.minSdkVersion
         targetSdkVersion 34
         versionCode = flutter.versionCode
         versionName = flutter.versionName

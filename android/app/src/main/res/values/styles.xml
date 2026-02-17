@@ -15,4 +15,7 @@
     <style name="NormalTheme" parent="@android:style/Theme.Light.NoTitleBar">
         <item name="android:windowBackground">?android:colorBackground</item>
     </style>
+
+    <!-- Firebase App Check Debug Token -->
+    <string name="firebase_app_check_debug_token">00000000-0000-4000-A000000000000</string>
 </resources>
